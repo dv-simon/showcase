@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="false" default-autowire="byName">
+
+	<description>Shiro Security Configuration</description>
+	
+<!-- 	<bean id="userService" class="cft.commons.showcase.service.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"/>
+	</bean>
+	<bean id="roleService" class="cft.commons.showcase.service.impl.RoleServiceImpl">
+		<property name="roleDAO" ref="roleDAO"/>
+	</bean> -->
+	
+	
+	<!-- ========================= Project Custom Realm ============================== -->
+	<bean id="shiroJdbcRealm" class="cft.commons.showcase.shiro.realm.ShiroJdbcRealm" depends-on="userDAO,roleDAO">
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- ======== Shiro's main business-tier object for web-enabled applications ===== -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroJdbcRealm" />
+		<!-- <property name="cacheManager" ref="shiroEhcacheManager" /> -->
+	</bean>
+
+
+	<!-- ================================ Shiro Filter =============================== -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/uams/login" />
+		<property name="successUrl" value="/uams/main" />
+		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<property name="filterChainDefinitions">
+			<value>
+			    /static/** = anon
+			    /favicon.ico = anon 
+				/uams/login = authc
+				/uams/logout = logout
+				/** = user
+			</value>
+		</property>
+	</bean>
+
+
+	<!-- ======================== Cache, using EhCache ============================== -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml" />
+	</bean>
+
+
+	<!-- ======= guarantee Shiro internal lifecycle methods bean invoking =========== -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+
+	<!-- ================ Enabling Shiro Annotations , AOP driver =================== -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>
