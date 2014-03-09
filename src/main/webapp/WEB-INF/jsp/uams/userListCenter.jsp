@@ -24,7 +24,7 @@
 					<th data-options="field:'office',align:'center',width:'100'"><spring:message code="label.office"/></th>
 					<th data-options="field:'dept',align:'center'"><spring:message code="label.dept"/></th>
 					<th data-options="field:'status',align:'center',width:'100'" sortable="true"><spring:message code="label.status"/></th>
-					<th data-options="field:'remark',width:'150'"><spring:message code="label.remark"/></th>
+					<th data-options="field:'remark',width:'130'"><spring:message code="label.remark"/></th>
 				</tr>
 			</thead>
 		</table>

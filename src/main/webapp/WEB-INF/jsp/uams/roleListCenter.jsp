@@ -19,7 +19,7 @@
 					<th data-options="field:'name',width:'150'"><spring:message code="label.roleName"/></th>
 					<th data-options="field:'permissions',width:'770'"><spring:message code="label.permissions"/></th>
 					<th data-options="field:'status',align:'center',width:'100'" sortable="true"><spring:message code="label.status"/></th>
-					<th data-options="field:'remark',width:'100'"><spring:message code="label.remark"/></th>
+					<th data-options="field:'remark',width:'90'"><spring:message code="label.remark"/></th>
 				</tr>
 			</thead>
 		</table>
