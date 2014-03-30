@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,8 +20,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.encrypt.EncryptUtils;
@@ -34,9 +34,8 @@ import com.google.common.base.Objects;
  * @author daniel
  *
  */
+@Slf4j
 public class ShiroJdbcRealm extends AuthorizingRealm {
-
-	private static final Logger logger = LoggerFactory.getLogger(ShiroJdbcRealm.class);
 
 	protected UserService userService;
 
@@ -47,10 +46,10 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+		
 		User user = userService.getUserByLoginName(token.getUsername());
 		
 		if (user != null) {
-			logger.info(Constants.SVC_LOG + "doGetAuthenticationInfo:user = " + user);
 
 			if (StringUtils.equals(Constants.STATUS_CODE_INACTIVE, user.getStatus())) {
 				throw new DisabledAccountException();
@@ -68,7 +67,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 			return new SimpleAuthenticationInfo(shiroUser, user.getPassword(), ByteSource.Util.bytes(salt), getName());
 
 		} else {
-			logger.info(Constants.SVC_LOG + "doGetAuthenticationInfo:user is null");
+			log.info(Constants.SVC_LOG + "doGetAuthenticationInfo:user is null");
 			return null;
 		}
 	}
@@ -86,7 +85,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 
 		//判断当前用户状态是否正常，如正常则进行用户权限查询，否则直接logout当前用户
 		if (user != null && StringUtils.equals(user.getStatus(), Constants.STATUS_CODE_ACTIVE)) {
-			logger.info(Constants.SVC_LOG + "ShiroDbRealm:doGetAuthorizationInfo:user:" + user);
+			log.info(Constants.SVC_LOG + "ShiroDbRealm:doGetAuthorizationInfo:user:" + user);
 			info = new SimpleAuthorizationInfo();
 			for (Role role : user.getRoleList()) {
 				//基于Role的权限信息
@@ -95,10 +94,10 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 				info.addStringPermissions(role.getAllPermissions());
 			}
 
-			logger.info(Constants.SVC_LOG + "AuthorizationInfo:Roles: " + info.getRoles());
-			logger.info(Constants.SVC_LOG + "AuthorizationInfo:StringPermissions: " + info.getStringPermissions());
+			log.info(Constants.SVC_LOG + "AuthorizationInfo:Roles: " + info.getRoles());
+			log.info(Constants.SVC_LOG + "AuthorizationInfo:StringPermissions: " + info.getStringPermissions());
 		} else {
-			logger.info(Constants.SVC_LOG + "ShiroDbRealm:doGetAuthorizationInfo:user is null");
+			log.info(Constants.SVC_LOG + "ShiroDbRealm:doGetAuthorizationInfo:user is null");
 			SecurityUtils.getSubject().logout(); //如当前用户已不存在或非活动状态，则直接执行logout
 		}
 

@@ -52,6 +52,16 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
+	<!-- ============================ SiteMesh filter ================================== -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/app/view/*</url-pattern>
+	</filter-mapping>
+
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
@@ -66,15 +76,11 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/view/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/uams/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 </web-app>

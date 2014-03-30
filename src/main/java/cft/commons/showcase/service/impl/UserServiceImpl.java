@@ -55,7 +55,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(User user) {
+	public Integer getUserListCount(User user) {
+		return userDAO.getUserListCount(user);
+	}
+
+	@Override
+	public void createUser(User user) throws Exception {
 
 		if (StringUtils.isNotBlank(user.getPlainPassword())) {
 
@@ -85,11 +90,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByLoginName(String loginName) {
 		User user = userDAO.getUserByLoginName(loginName);
-
-		if (log.isDebugEnabled()) {
-			log.debug(Constants.SVC_LOG + "getUserByLoginName:User: " + user);
-		}
-
 		return user;
 	}
 
@@ -105,14 +105,15 @@ public class UserServiceImpl implements UserService {
 		log.info(Constants.SVC_LOG + "UserServiceImpl:updateUser:user = " + user);
 
 		userDAO.deleteUserRole(user.getUserId());
+		if (CollectionUtils.isNotEmpty(user.getRoleList())) {
+			for (Role role : user.getRoleList()) {
 
-		for (Role role : user.getRoleList()) {
+				Map<String, String> paramMap = new HashMap<String, String>();
+				paramMap.put("userId", user.getUserId());
+				paramMap.put("roleId", role.getRoleId());
 
-			Map<String, String> paramMap = new HashMap<String, String>();
-			paramMap.put("userId", user.getUserId());
-			paramMap.put("roleId", role.getRoleId());
-
-			userDAO.insertUserRole(paramMap);
+				userDAO.insertUserRole(paramMap);
+			}
 		}
 
 		return userDAO.updateUser(user);

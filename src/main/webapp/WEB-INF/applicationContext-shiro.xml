@@ -5,13 +5,6 @@
 
 	<description>Shiro Security Configuration</description>
 	
-<!-- 	<bean id="userService" class="cft.commons.showcase.service.impl.UserServiceImpl">
-		<property name="userDAO" ref="userDAO"/>
-	</bean>
-	<bean id="roleService" class="cft.commons.showcase.service.impl.RoleServiceImpl">
-		<property name="roleDAO" ref="roleDAO"/>
-	</bean> -->
-	
 	
 	<!-- ========================= Project Custom Realm ============================== -->
 	<bean id="shiroJdbcRealm" class="cft.commons.showcase.shiro.realm.ShiroJdbcRealm" depends-on="userDAO,roleDAO">
@@ -28,15 +21,15 @@
 	<!-- ================================ Shiro Filter =============================== -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/uams/login" />
-		<property name="successUrl" value="/uams/main" />
-		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<property name="loginUrl" value="/app/login" />
+		<property name="successUrl" value="/app/view/user" />
+		<!-- <property name="unauthorizedUrl" value="/unauthorized.jsp" /> -->
 		<property name="filterChainDefinitions">
 			<value>
 			    /static/** = anon
 			    /favicon.ico = anon 
-				/uams/login = authc
-				/uams/logout = logout
+				/app/login = authc
+				/app/logout = logout
 				/** = user
 			</value>
 		</property>

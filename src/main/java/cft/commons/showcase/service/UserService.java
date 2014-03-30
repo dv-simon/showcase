@@ -12,14 +12,16 @@ public interface UserService {
 
 	String generatePK();
 
-	void createUser(User user);
+	void createUser(User user)throws Exception;
 
 	User getUserByUserId(String userid);
 
 	User getUserByLoginName(String loginName);
 
 	List<User> getUserList(User user);
-
+	
+	Integer getUserListCount(User user);
+	
 	Integer updateUser(User user);
 
 	Integer deleteUser(String userId);

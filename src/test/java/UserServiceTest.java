@@ -17,7 +17,7 @@ public class UserServiceTest {
 	private UserService userService;
 
 	@Test
-	public void CRUD() {
+	public void CRUD() throws Exception {
 
 		User user = new User();
 		user.setLoginName("88888");

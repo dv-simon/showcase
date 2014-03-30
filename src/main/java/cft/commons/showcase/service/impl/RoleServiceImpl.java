@@ -3,7 +3,6 @@ package cft.commons.showcase.service.impl;
 import java.util.List;
 
 import lombok.Synchronized;
-import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import cft.commons.showcase.service.RoleService;
  * @author daniel
  *
  */
-@Slf4j
 @Component("roleService")
 public class RoleServiceImpl implements RoleService {
 

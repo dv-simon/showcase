@@ -40,8 +40,8 @@ public class User implements Serializable {
 	private Integer rows; //pageSize
 	private Integer page; //pageNumber
 
-	private String sort; //sortColumn
-	private String order; //sortOrder
+	private String sidx; //sortColumn
+	private String sord; //sortOrder
 
 	public String getRoleNames() {
 		return Collections3.extractToString(roleList, "name", ", ");

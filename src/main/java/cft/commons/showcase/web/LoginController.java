@@ -1,5 +1,7 @@
 package cft.commons.showcase.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,20 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String toMain() {
-		return "/uams/main";
+	@RequestMapping(value = "/view/index", method = RequestMethod.GET)
+	public String login(String item, String subItem,Model model,HttpSession session) {
+		session.setAttribute("item", item);
+		return "/index";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		return "uams/login";
+		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-		return "uams/login";
+		return "login";
 	}
 
 }

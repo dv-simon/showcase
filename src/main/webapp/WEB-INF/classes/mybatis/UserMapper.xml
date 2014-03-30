@@ -58,17 +58,7 @@
 
 
 	<select id="getUserByUserId" parameterType="String" resultMap="userResultMap">
-		SELECT t_user.*
-		,t_role.roleId AS ROLE_ID
-		,t_role.name AS ROLE_NAME
-		,t_role.permissions AS ROLE_PERMISSIONS
-		,t_role.status AS ROLE_STATUS
-		,t_role.remark AS
-		ROLE_REMARK
-		FROM APP_USER t_user
-		LEFT JOIN APP_USER_ROLE t_ur on t_ur.userId = t_user.userId
-		LEFT JOIN APP_ROLE t_role on
-		t_role.roleId = t_ur.roleId and t_role.status = 'active'
+		<include refid="getUser" />
 		WHERE t_user.USERID = #{userId}
 	</select>
 
@@ -92,13 +82,66 @@
 			<if test="name != null and name != '' ">
 					<![CDATA[ AND NAME like CONCAT('%',#{name},'%') ]]>
 			</if>
+			<if test="email != null and email != '' ">
+					<![CDATA[ AND EMAIL like CONCAT('%',#{email},'%') ]]>
+			</if>
+			<if test="phone != null and phone != '' ">
+					<![CDATA[ AND phone like CONCAT('%',#{phone},'%') ]]>
+			</if>
+			<if test="office != null and office != '' ">
+					<![CDATA[ AND office like CONCAT('%',#{office},'%') ]]>
+			</if>
+			<if test="dept != null and dept != '' ">
+					<![CDATA[ AND dept like CONCAT('%',#{dept},'%')  ]]>
+			</if>
+			<if test="language != null and language != '' ">
+					<![CDATA[ AND language like CONCAT('%',#{language},'%') ]]>
+			</if>
 			<if test="status != null and status != '' ">
 					<![CDATA[ AND STATUS = #{status}  ]]>
 			</if>
+			<if test="remark != null and remark != '' ">
+					<![CDATA[ AND remark like CONCAT('%',#{remark},'%') ]]>
+			</if>
 		</where>
-		<![CDATA[ order by USERID ]]>
+		<![CDATA[ORDER BY ${sidx} ${sord} LIMIT #{startIndex} , #{rows}]]>
 	</select>
 
+	<select id="getUserListCount" resultType="Integer">
+		<![CDATA[
+		SELECT COUNT(*) AS count FROM APP_USER
+		]]>
+		<where>
+			<if test="userId != null and userId != ''">
+					<![CDATA[ USERID like CONCAT('%',#{userId},'%') ]]>
+			</if>
+			<if test="loginName != null and loginName != '' ">
+					<![CDATA[ AND LOGINNAME like CONCAT('%',#{loginName},'%') ]]>
+			</if>
+			<if test="name != null and name != '' ">
+					<![CDATA[ AND NAME like CONCAT('%',#{name},'%') ]]>
+			</if>
+			<if test="email != null and email != '' ">
+					<![CDATA[ AND EMAIL like CONCAT('%',#{email},'%') ]]>
+			</if>
+			<if test="phone != null and phone != '' ">
+					<![CDATA[ AND phone like CONCAT('%',#{phone},'%') ]]>
+			</if>
+			<if test="office != null and office != '' ">
+					<![CDATA[ AND office like CONCAT('%',#{office},'%') ]]>
+			</if>
+			<if test="dept != null and dept != '' ">
+					<![CDATA[ AND dept like CONCAT('%',#{dept},'%')  ]]>
+			</if>
+			<if test="language != null and language != '' ">
+					<![CDATA[ AND language like CONCAT('%',#{language},'%') ]]>
+			</if>
+			<if test="status != null and status != '' ">
+					<![CDATA[ AND STATUS = #{status}  ]]>
+			</if>	
+		</where>
+		
+	</select>
 
 	<insert id="insertUser">
  	<![CDATA[

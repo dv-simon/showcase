@@ -11,6 +11,11 @@
 		<entry key="zh_TW" value="繁體中文" />
 		<entry key="zh_CN" value="简体中文 " />
 	</util:map>
+	
+	<util:map id="statusMap" map-class="java.util.LinkedHashMap">
+		<entry key="active" value="ACTIVE" />
+		<entry key="inactive" value="INACTIVE" />
+	</util:map>
 
 
 </beans>

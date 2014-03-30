@@ -25,6 +25,14 @@ public class Role implements Serializable {
 	private String remark;
 
 	List<String> permissionList; // for UI checkbox component
+	
+	private Integer startIndex;
+	private Integer endIndex;
+	private Integer rows; //pageSize
+	private Integer page; //pageNumber
+
+	private String sidx; //sortColumn
+	private String sord; //sortOrder
 
 	
 	public List<String> getAllPermissions() {

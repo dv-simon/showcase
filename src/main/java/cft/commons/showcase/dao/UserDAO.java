@@ -18,6 +18,8 @@ public interface UserDAO {
 	User getUserByLoginName(String loginName) throws DataAccessException;
 
 	List<User> getUserList(User user) throws DataAccessException;
+	
+	Integer getUserListCount(User user) throws DataAccessException;
 
 	void insertUser(User user) throws DataAccessException;
 

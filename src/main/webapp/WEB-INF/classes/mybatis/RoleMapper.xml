@@ -32,8 +32,19 @@
 			<if test="status != null and status != '' ">
 				<![CDATA[ AND STATUS = #{status}  ]]>
 			</if>
+			<if test="remark != null and remark != '' ">
+					<![CDATA[ AND remark like CONCAT('%',#{remark},'%') ]]>
+			</if>
 			</where>
-			<![CDATA[ order by ROLEID]]>
+			
+			<choose>  
+        		<when test="sidx != null and sidx != '' ">  
+            		<![CDATA[ORDER BY ${sidx} ${sord}]]>  
+       			 </when>  
+				 <otherwise>  
+           			 <![CDATA[ORDER BY roleId]]> 
+       			 </otherwise>  
+   			 </choose>  
 	</select>
 	
 
