@@ -46,7 +46,7 @@ public class RoleViewController {
 		
 		if(StringUtils.equals(act,"edit") && StringUtils.isNotBlank(roleId)){
 			Role role = roleService.getRoleByRoleId(roleId);
-			role.setPermissionList(role.getAllPermissions());
+			role.setPermissionList(role.retrieveAllPermissions());
 			
 			model.addAttribute("roleForm", role);
 			
@@ -76,7 +76,7 @@ public class RoleViewController {
 	public String toUpdateRole(String roleId, Model model) {
 
 		Role role = roleService.getRoleByRoleId(roleId);
-		role.setPermissionList(role.getAllPermissions());
+		role.setPermissionList(role.retrieveAllPermissions());
 		
 		model.addAttribute("roleForm", role);
 		

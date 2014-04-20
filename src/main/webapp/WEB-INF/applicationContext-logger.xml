@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<bean id="methodLoggerInterceptor" class="cft.commons.showcase.web.interceptor.ActionLogInterceptor"/>
+
+	<!-- =======================PointCut Advisor Definitions=================================== -->
+	<bean id="loggerPointcut"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="methodLoggerInterceptor" />
+		<property name="patterns">
+			<list>
+				<value>.*ServiceImpl.get.*</value>
+				<value>.*ServiceImpl.create.*</value>
+				<value>.*ServiceImpl.insert.*</value>
+				<value>.*ServiceImpl.update.*</value>
+				<value>.*ServiceImpl.change.*</value>
+				<value>.*ServiceImpl.delete.*</value>
+				<value>.*ServiceImpl.disable.*</value>
+				
+			</list>
+		</property>
+	</bean>
+
+	<!-- ================================ BeanNameAutoProxy =================================== -->
+	<bean id="loggerAutoproxy"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<!-- DAO functions -->
+				<value>*Service</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>loggerPointcut</value>
+			</list>
+		</property>
+	</bean>
+</beans>

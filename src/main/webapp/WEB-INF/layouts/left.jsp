@@ -226,26 +226,19 @@
 						<!-- ================= Level-1 item ================= -->
 						
 						<!-- ================= Level-1 item ================= -->
-						<li>
+						<li id="systemLog">
 							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text"> Function7 </span>
+								<i class="icon-exchange"></i>
+								<span class="menu-text"> System Log </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
 
 							<ul class="submenu">
-								<li>
-									<a href="#">
+								<li id="actionLog">
+									<a href="${ctx}/app/view/actionLog?item=systemLog&subItem=actionLog">
 										<i class="icon-double-angle-right"></i>
-										Sub Function1
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<i class="icon-double-angle-right"></i>
-										Sub Function2
+										Action Log
 									</a>
 								</li>
 							</ul>

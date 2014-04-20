@@ -91,7 +91,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 				//基于Role的权限信息
 				info.addRole(role.getRoleId());
 				//基于Permission的权限信息
-				info.addStringPermissions(role.getAllPermissions());
+				info.addStringPermissions(role.retrieveAllPermissions());
 			}
 
 			log.info(Constants.SVC_LOG + "AuthorizationInfo:Roles: " + info.getRoles());

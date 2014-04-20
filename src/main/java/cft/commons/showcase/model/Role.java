@@ -35,7 +35,7 @@ public class Role implements Serializable {
 	private String sord; //sortOrder
 
 	
-	public List<String> getAllPermissions() {
+	public List<String> retrieveAllPermissions() {
 
 		List<String> list = new ArrayList<String>();
 

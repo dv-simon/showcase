@@ -25,7 +25,7 @@
 				<div class="tabbable">
 					<ul class="nav nav-tabs" id="myTab">
 						<li class="active"><a data-toggle="tab" href="#userInfo"> <i
-								class="green icon-edit bigger-110"></i> User Info
+								class="green icon-user bigger-110"></i> User Info
 						</a></li>
 
 						<c:if test="${!empty userForm.userId}">

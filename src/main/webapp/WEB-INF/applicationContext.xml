@@ -49,11 +49,13 @@
 	<import resource="classpath:/constants/globalConstants.xml" />
 	<import resource="applicationContext-jdbc.xml" />
 	<import resource="applicationContext-shiro.xml" />
+	<import resource="applicationContext-redis.xml" />
+	<import resource="applicationContext-logger.xml" />
 
 	<!--
 
 	<import resource="applicationContext-jpa.xml" />
-	<import resource="applicationContext-redis.xml" />
+	
 	<import resource="applicationContext-redisCache.xml" />
 	<import resource="applicationContext-redisLock.xml" />
 	<import resource="applicationContext-ehcache.xml" />

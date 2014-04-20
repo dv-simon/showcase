@@ -6,7 +6,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
-import cft.commons.core.util.Collections3;
 
 /**
  * @author daniel
@@ -43,8 +42,8 @@ public class User implements Serializable {
 	private String sidx; //sortColumn
 	private String sord; //sortOrder
 
-	public String getRoleNames() {
+	/*public String retrieveRoleNames() {
 		return Collections3.extractToString(roleList, "name", ", ");
-	}
+	}*/
 
 }

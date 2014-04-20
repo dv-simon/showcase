@@ -34,12 +34,12 @@
 		<property name="defaultViews">
 			<list>
 				<!-- JSON View -->
-				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 					<property name="extractValueFromSingleKeyModel" value="true" />
 					<property name="objectMapper">
-						<bean class="org.codehaus.jackson.map.ObjectMapper">
+						<bean class="com.fasterxml.jackson.databind.ObjectMapper">
 							<property name="serializationInclusion">
-								<value type="org.codehaus.jackson.map.annotate.JsonSerialize$Inclusion">NON_NULL</value>
+								<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_EMPTY</value>
 							</property>
 						</bean>
 					</property>
@@ -78,11 +78,7 @@
 				<ref bean="xStreamDateTimeConverter" />
 			</list>
 		</property>
-		<!-- <property name="annotatedClasses">
-			<list>
-				<value>ms.commons.showcase.model.entity.SportsNews</value>
-			</list>
-		</property> -->
+		<!-- <property name="annotatedClasses"> <list> <value>ms.commons.showcase.model.entity.SportsNews</value> </list> </property> -->
 	</bean>
 
 	<bean id="xStreamDateTimeConverter" class="cft.commons.core.helper.xstream.XStreamDateTimeConverter">
@@ -98,7 +94,24 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper">
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+					</bean>
+				</property>
+				<!-- <property name="serializationInclusion">
+					<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_EMPTY</value>
+				</property> -->
+			</bean>
+		</property>
+
+		<property name="prettyPrint" value="true" />
+	</bean>
+
 
 
 
@@ -108,7 +121,7 @@
 			<bean class="cft.commons.core.web.intereptor.WebStopWatchInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+
 	<!-- ======================= Using Annotation Handler Mapping =========================== -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
@@ -126,6 +139,6 @@
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="lang" />
 	</bean>
-	
+
 
 </beans>

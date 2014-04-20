@@ -106,12 +106,12 @@
 												</a>
 											</div>
 
-											<div>
+<!-- 											<div>
 												<a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
 													I want to register
 													<i class="icon-arrow-right"></i>
 												</a>
-											</div>
+											</div> -->
 										</div>
 									</div><!-- /widget-body -->
 								</div><!-- /login-box -->

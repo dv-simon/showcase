@@ -34,7 +34,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- Disabled to avoid concurrent AOP -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 	
 
 	<!-- ===================== Spring JdbcTemplate ORM Framework ============================= 
