@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="true">
+
+	<!-- MIME邮件服务类 -->
+	<bean id="mimeMailService" class="cft.commons.showcase.service.impl.EmailServiceImpl">
+		<property name="mailSender" ref="mailSender" />
+		<property name="contentTemplate">
+			<value><![CDATA[
+			<html>
+			</head><body>
+			<pre>
+			%s 您好:
+
+				我们已收到您需要重新设定帐号密码的请求,為完成此程序，我們須驗證此位址是否
+				為您的電子郵件位址。只要按以下連結並输入您的用户帐号與新密碼即可重设密码。
+
+				<a href="http://localhost/app/forgotPassword/%s">立即驗證并修改密码 ></a> (此链接10分钟内一次有效)
+
+				想知道您為何會收到此郵件嗎?
+				當有人点击'忘记密码'并试图修改你的帳號的密码時，此郵件就會自動傳送。
+				如果您沒有採取任何動作，請不用擔心。您可以忽略此封Email而不做任何变更。
+
+				如需更多資訊，請參閱常見問答集
+
+				感謝您，
+				CFT 客戶支援
+				%tF
+				<img src="cid:cs_girl" height="152" width="200"/>
+			</pre>
+			</body></html>
+			]]></value>
+		</property>
+	</bean>
+
+	<!-- 邮件发送器 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="username" value="tvbcomzhuhai@gmail.com" />
+		<property name="password" value="tvbcom1234" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<!-- 使用gmail smtp server的必须参数 -->
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>
