@@ -26,7 +26,6 @@ import cft.commons.core.model.display.ResultJSON;
 import cft.commons.showcase.model.Role;
 import cft.commons.showcase.model.User;
 import cft.commons.showcase.service.UserService;
-import cft.commons.showcase.web.RolePropertyEditor;
 
 /**
  * @author daniel
@@ -74,7 +73,6 @@ public class UserAPIController {
 	@RequestMapping(value = "/api/v1/user", method = RequestMethod.POST)
 	public @ResponseBody
 	ResultJSON saveUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Locale locale) {
-
 		ResultJSON json = new ResultJSON();
 
 		//if userId is null, then create new record

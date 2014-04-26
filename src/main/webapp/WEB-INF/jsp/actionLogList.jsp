@@ -36,7 +36,7 @@ jQuery("#listDataGrid").jqGrid({
 	datatype: "json",
 	height: 500,
 	autowidth: true,
-   	colNames:['log Time','Log Type','Log Class', 'Log Body', 'ExecuteTime (ms)','Remark'],
+   	colNames:['Log Time','Log Type','Log Class', 'Log Body', 'ExecuteTime (ms)','Remark'],
    	colModel:[
    		{name:'logTime',index:'logTime', width:80,sortable:false,search:false},
    		{name:'logType',index:'logType', width:40,sortable:false,search:false},

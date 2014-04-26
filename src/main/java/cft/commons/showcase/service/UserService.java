@@ -15,6 +15,8 @@ public interface UserService {
 	void createUser(User user)throws Exception;
 
 	User getUserByUserId(String userid);
+	
+	User getUserByEmail(String email);
 
 	User getUserByLoginName(String loginName);
 

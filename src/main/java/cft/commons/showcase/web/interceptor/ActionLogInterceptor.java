@@ -14,7 +14,7 @@ import org.springframework.util.StopWatch;
 
 import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.jackson.JsonMapper;
-import cft.commons.showcase.constant.RedisConstants;
+import cft.commons.showcase.constant.ShowcaseConstants;
 import cft.commons.showcase.model.ActionLog;
 
 /**
@@ -49,35 +49,32 @@ public class ActionLogInterceptor implements MethodInterceptor {
 		result = invocation.proceed();
 		stopWatch.stop();
 		long executeTime = stopWatch.getTotalTimeMillis();
-	
-		
+
 		ActionLog systemLog = new ActionLog();
 		systemLog.setLogTime(new Date());
 		systemLog.setLogType("INFO");
 		systemLog.setLogClass(className);
 		systemLog.setLogBody("Invoked method:  " + methodName);
 		systemLog.setExecuteTime(executeTime);
-		
+
 		JsonMapper jsonMapper = new JsonMapper();
 		jsonMapper.getMapper().setDateFormat(new SimpleDateFormat(Constants.C_DATETIME_PATTERN_DEFAULT));
-		String logString  = jsonMapper.toJson(systemLog);
-		
-		redisTemplate.opsForList().leftPush(RedisConstants.KEY_SYSTEM_LOG_ACTION, logString);
-		int totalRecords = redisTemplate.opsForList().size(RedisConstants.KEY_SYSTEM_LOG_ACTION).intValue();
-		
-		if(totalRecords > 1000){
-			redisTemplate.opsForList().trim(RedisConstants.KEY_SYSTEM_LOG_ACTION, 0, 100 - 1);
+		String logString = jsonMapper.toJson(systemLog);
+
+		redisTemplate.opsForList().leftPush(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, logString);
+		int totalRecords = redisTemplate.opsForList().size(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION).intValue();
+
+		if (totalRecords > 1000) {
+			redisTemplate.opsForList().trim(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, 0, 100 - 1);
 		}
-		
-		
+
 		//Generate Function end log
 		logBody.append(" ------> End");
 		logBody.append(" ,execution time: ");
 		logBody.append(executeTime);
 		logBody.append(" ms");
-		
+
 		log.debug(logBody.toString());
-	
 
 		return result;
 	}

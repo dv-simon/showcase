@@ -30,6 +30,8 @@
 			    /favicon.ico = anon 
 				/app/login = authc
 				/app/logout = logout
+				/app/forgotPassword/** = anon
+				/app/resetPassword = anon
 				/** = user
 			</value>
 		</property>

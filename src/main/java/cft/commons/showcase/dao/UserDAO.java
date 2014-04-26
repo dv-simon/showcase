@@ -16,6 +16,8 @@ public interface UserDAO {
 	User getUserByUserId(String userId) throws DataAccessException;
 
 	User getUserByLoginName(String loginName) throws DataAccessException;
+	
+	User getUserByEmail(String email) throws DataAccessException;
 
 	List<User> getUserList(User user) throws DataAccessException;
 	

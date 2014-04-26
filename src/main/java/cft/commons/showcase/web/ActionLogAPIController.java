@@ -15,7 +15,7 @@ import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.jackson.JsonMapper;
 import cft.commons.core.helper.pagination.RedisPaginationUtils;
 import cft.commons.core.model.display.JqPageObject;
-import cft.commons.showcase.constant.RedisConstants;
+import cft.commons.showcase.constant.ShowcaseConstants;
 import cft.commons.showcase.model.ActionLog;
 
 @Controller
@@ -30,13 +30,14 @@ public class ActionLogAPIController {
 
 		int pageNo = systemLog.getPage(); //current page number ,default:1
 		int pageSize = systemLog.getRows(); //records size per page, defaults :10	
-		int totalRecords = redisTemplate.opsForList().size(RedisConstants.KEY_SYSTEM_LOG_ACTION).intValue(); //total count of records
+		int totalRecords = redisTemplate.opsForList().size(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION).intValue(); //total count of records
 
 		int totalPage = RedisPaginationUtils.getTotalPage(totalRecords, pageSize);
 		int start = RedisPaginationUtils.getStartIndex(pageSize, pageNo);
 		int end = RedisPaginationUtils.getEndIndex(pageSize, pageNo);
 		
-		List<String> logJsonList = redisTemplate.opsForList().range(RedisConstants.KEY_SYSTEM_LOG_ACTION, start, end);
+		List<String> logJsonList = redisTemplate.opsForList()
+				.range(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, start, end);
 		
 		JsonMapper jsonMapper = new JsonMapper();
 		jsonMapper.getMapper().setDateFormat(new SimpleDateFormat(Constants.C_DATETIME_PATTERN_DEFAULT));

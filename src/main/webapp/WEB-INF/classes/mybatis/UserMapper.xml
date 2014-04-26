@@ -61,6 +61,11 @@
 		<include refid="getUser" />
 		WHERE t_user.USERID = #{userId}
 	</select>
+	
+	<select id="getUserByEmail" parameterType="String" resultMap="userResultMap">
+		<include refid="getUser" />
+		WHERE t_user.EMAIL = #{email}
+	</select>
 
 	<select id="getLastPK" resultType="String">
 		<![CDATA[

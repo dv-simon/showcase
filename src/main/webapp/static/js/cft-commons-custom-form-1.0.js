@@ -5,4 +5,10 @@ $('textarea.limited').inputlimiter({
 			limitText: 'max allowed : %n.'			
 });
 
-
+//屏蔽掉 Enter键 防止提交表单
+function NoSubmit(ev){
+    if(ev.keyCode == 13){
+        return false;
+    }
+    return true;
+}

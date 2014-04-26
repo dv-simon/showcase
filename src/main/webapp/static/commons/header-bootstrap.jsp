@@ -121,6 +121,8 @@ try {
     }
 </style>
 
+
+<!-- ============= Alert 对话框 ========================= -->
 <script type="text/javascript">
 function showAndDismissAlert(type,icon,title,detial,delay) {
     var htmlAlert = '<div class="alert alert-' + type + '">'+
@@ -129,6 +131,18 @@ function showAndDismissAlert(type,icon,title,detial,delay) {
 
     $(".alert-messages").prepend(htmlAlert);
     $(".alert-messages .alert").first().hide().fadeIn(200).delay(delay).fadeOut(1000, function () { $(this).remove(); });
+}
+
+function alertRedirect(type,icon,title,detial,delay,url){
+	
+	var htmlAlert = '<div class="alert alert-' + type + '">'+
+    '<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>'+
+    '<strong><i class="'+icon+'"></i>'+title+'</strong><br/>'+ detial + '<br/></div>';
+
+    $(".alert-messages").prepend(htmlAlert);
+    $(".alert-messages .alert").first().hide().fadeIn(200).delay(delay).fadeOut(1000, function () { $(this).remove(); });
+    
+	window.location = url;
 }
 </script>
 <div class="alert-messages text-center"></div>

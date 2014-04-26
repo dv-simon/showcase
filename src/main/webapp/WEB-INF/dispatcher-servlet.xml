@@ -139,6 +139,15 @@
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="lang" />
 	</bean>
+	
+	<!-- ============================= Exception handling =================================== -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+		<property name="exceptionMappings">  
+			<props>
+				<prop key="java.lang.Exception">error/500</prop>
+            </props>  
+		</property>  
+    </bean> 
 
 
 </beans>

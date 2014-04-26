@@ -7,15 +7,26 @@
 <%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
 <%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
 <%@ page import="org.apache.shiro.authc.LockedAccountException "%>
-
+<%@ page import="org.apache.shiro.SecurityUtils"%>
+<%@ page import="org.apache.shiro.subject.Subject"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Login</title>
 <%@ include file="/static/commons/meta.jsp"%>
-<%@ include file="/static/commons/header-bootstrap.jsp"%>
+<%@ include file="/static/commons/jstl-taglibs.jsp"%>
+<%@ include file="/static/commons/header-bootstrap.jsp"%>	
+
 </head>
 
+<%
+//判断如果已经登录则直接重定向到 homepage
+		Subject currentUser = SecurityUtils.getSubject();
+		if (currentUser != null && currentUser.isAuthenticated()) {
+			//isAuthenticated = true;
+			response.sendRedirect("/app/view/index?item=dashboard");
+		}
+%>
 
 <body class="login-layout">
 		<div class="main-container">
@@ -106,12 +117,12 @@
 												</a>
 											</div>
 
-<!-- 											<div>
-												<a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+										<div>
+												<!--  <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
 													I want to register
 													<i class="icon-arrow-right"></i>
-												</a>
-											</div> -->
+												</a>-->
+											</div>
 										</div>
 									</div><!-- /widget-body -->
 								</div><!-- /login-box -->
@@ -129,17 +140,17 @@
 												Enter your email and to receive instructions
 											</p>
 
-											<form>
+											<form id="forgotPasswordForm" action="${ctx}/app/forgotPassword" method="post" onkeypress="javascript:return NoSubmit(event);" >
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input id="email" name="email" type="email" class="form-control" placeholder="Email" />
 															<i class="icon-envelope"></i>
 														</span>
 													</label>
 
 													<div class="clearfix">
-														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+														<button type="button" onclick="forgotPassword()" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="icon-lightbulb"></i>
 															Send Me!
 														</button>
@@ -273,6 +284,47 @@
 	</c:choose>
 
 	</c:if>
+	
+	<c:if test="${!empty forgotPasswordError}">
+	<c:choose>
+  	 <c:when test="${forgotPasswordError eq 'token.inavaild'}">  
+   	 	 <script>showAndDismissAlert('danger','icon-remove','Token expired','Can not continue to reset password.',4000);</script>
+  	 </c:when>
+   	<c:otherwise>  
+   		<script>showAndDismissAlert('danger','icon-remove','System Error','',2000);</script>
+   	</c:otherwise>
+	</c:choose>
+
+	</c:if>
 		
 	</body>
+	<script type="text/javascript">
+	
+	var options = {
+			   //target: '#output',          //把服务器返回的内容放入id为output的元素中    
+			  // beforeSubmit: beforeSubmit,  //提交前的回调函数
+			   success: processResponse,      //提交后的回调函数
+			   dataType:'json',			   //html(默认), xml, script, json...接受服务端返回的类型
+			   //url: url,                 //默认是form的action， 如果申明，则会覆盖
+			   //type: type,               //默认是form的method（get or post），如果申明，则会覆盖   
+			   //clearForm: true,          //成功提交后，清除所有表单元素的值
+			   resetForm: true,          //成功提交后，重置所有表单元素的值
+			   timeout: 5000               //限制请求的时间，当请求大于3秒后，跳出请求
+				}
+				
+	function processResponse(data){
+		if(data.success == true){
+			showAndDismissAlert('success','icon-ok',data.message,'',4000);
+			show_box('login-box'); return false;
+		}else{			
+			showAndDismissAlert('danger','icon-remove',data.message,'',3000);
+		}
+	}
+
+	function forgotPassword() {
+		$("#forgotPasswordForm").ajaxSubmit(options);
+	} 
+	
+	</script>
+	<script src="${ctx}/static/js/cft-commons-custom-form-1.0.js"></script>
 </html>
