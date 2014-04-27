@@ -9,12 +9,12 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StopWatch;
 
 import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.jackson.JsonMapper;
 import cft.commons.showcase.constant.ShowcaseConstants;
+import cft.commons.showcase.dao.RedisDAO;
 import cft.commons.showcase.model.ActionLog;
 
 /**
@@ -24,7 +24,7 @@ import cft.commons.showcase.model.ActionLog;
 public class ActionLogInterceptor implements MethodInterceptor {
 
 	@Autowired
-	private StringRedisTemplate redisTemplate;
+	private RedisDAO redisDAO;
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -61,11 +61,10 @@ public class ActionLogInterceptor implements MethodInterceptor {
 		jsonMapper.getMapper().setDateFormat(new SimpleDateFormat(Constants.C_DATETIME_PATTERN_DEFAULT));
 		String logString = jsonMapper.toJson(systemLog);
 
-		redisTemplate.opsForList().leftPush(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, logString);
-		int totalRecords = redisTemplate.opsForList().size(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION).intValue();
-
-		if (totalRecords > 1000) {
-			redisTemplate.opsForList().trim(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, 0, 100 - 1);
+		try {
+			redisDAO.leftPushQueue(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, logString, 1000);
+		} catch (Exception ex) {
+			log.error("Exception during redisDAO.leftPushQueue.", ex);
 		}
 
 		//Generate Function end log

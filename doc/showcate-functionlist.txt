@@ -1,0 +1,32 @@
+1.Web:
+	*Spring MVC 演示：
+		dispatcher-servlet.xml
+		cft.commons.showcase.web.uams.*Controller (RESTful 风格)
+	
+	*UI　Layout Decoration
+		SiteMesh2：decorators.xml, web.xml, webapp/layouts/*
+		
+	*UI CSS Framework
+		Bootstrap3: webapp/static/assets/*
+		
+2.ORM Framework:
+	*JDBC MyBatis演示:
+		cft.commons.showcase.dao.mybatis.*DAO
+		WEB-INF/classes/mybatis/*.xml
+		
+	*NOSQL: Redis 演示：
+		1.利用Redis结合AOP建立log系统：
+			ActionLogInterceptor.java
+			ActionLog*Controller.java
+	
+Services:
+	*演示Java Email：
+		applicationContext-email.xml
+		EmailService.java 演示User forgot password通知Email
+		
+	*演示Security认证和授权:
+		applicationContext-shiro.xml
+		
+	*演示Qurtz实现的scheduler cronjob:
+		applicationContext-schedule.xml
+	

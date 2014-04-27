@@ -51,7 +51,7 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-    	<property name="basePackage" value="cft.commons.showcase.dao" />  
+    	<property name="basePackage" value="cft.commons.showcase.dao.mybatis" />  
 	</bean> 
 
 

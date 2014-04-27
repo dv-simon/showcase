@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.encrypt.EncryptUtils;
 import cft.commons.core.util.EncodeUtils;
-import cft.commons.showcase.dao.UserDAO;
+import cft.commons.showcase.dao.mybatis.UserDAO;
 import cft.commons.showcase.model.Role;
 import cft.commons.showcase.model.User;
 import cft.commons.showcase.service.UserService;
