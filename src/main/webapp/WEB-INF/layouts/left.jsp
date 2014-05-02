@@ -89,28 +89,28 @@
 						
 						
 						<!-- ================= Level-1 item ================= -->
-						<li>
+						<li id="commons">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-desktop"></i>
-								<span class="menu-text"> Function2 </span>
+								<span class="menu-text"> Commons </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
 
 							<ul class="submenu">
-								<li>
-									<a href="#">
+								<li id="imageUpload">
+									<a href="${ctx}/app/view/imageUpload?item=commons&subItem=imageUpload">
 										<i class="icon-double-angle-right"></i>
-										Sub Function1
+										Image upload
 									</a>
 								</li>
 
-								<li>
+								<!-- <li>
 									<a href="#">
 										<i class="icon-double-angle-right"></i>
 										Sub Function2
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</li>
 						<!-- ================= Level-1 item ================= -->

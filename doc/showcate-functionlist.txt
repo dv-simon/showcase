@@ -1,7 +1,8 @@
-1.Web:
-	*Spring MVC 演示：
+Web:
+=======================================================================
+	*Spring MVC 演示(RESTful 风格)：
 		dispatcher-servlet.xml
-		cft.commons.showcase.web.uams.*Controller (RESTful 风格)
+		cft.commons.showcase.web.uams.*Controller 
 	
 	*UI　Layout Decoration
 		SiteMesh2：decorators.xml, web.xml, webapp/layouts/*
@@ -9,7 +10,10 @@
 	*UI CSS Framework
 		Bootstrap3: webapp/static/assets/*
 		
-2.ORM Framework:
+
+
+ORM Framework:
+=======================================================================		
 	*JDBC MyBatis演示:
 		cft.commons.showcase.dao.mybatis.*DAO
 		WEB-INF/classes/mybatis/*.xml
@@ -18,15 +22,30 @@
 		1.利用Redis结合AOP建立log系统：
 			ActionLogInterceptor.java
 			ActionLog*Controller.java
-	
+
+
+
 Services:
-	*演示Java Email：
+=======================================================================
+	*演示Spring Email：
 		applicationContext-email.xml
 		EmailService.java 演示User forgot password通知Email
 		
-	*演示Security认证和授权:
+	*演示Shiro Security 做认证和授权:
 		applicationContext-shiro.xml
 		
 	*演示Qurtz实现的scheduler cronjob:
 		applicationContext-schedule.xml
+		
+	*演示使用Spring @Async做异步线程方法
+		EmailServiceImpl.class
 	
+	*演示Ajax 文件/图片上传
+		ImageUploadController
+
+
+
+Spring Basic:
+=======================================================================
+	*使用@Value 读取properties file : ImageUploadController
+	*使用System.getProperty("application.webapproot") 取得server绝对路径 : web.xml ImageUploadController
