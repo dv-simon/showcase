@@ -1,4 +1,4 @@
-package cft.commons.showcase.web;
+package cft.commons.showcase.web.uams;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;

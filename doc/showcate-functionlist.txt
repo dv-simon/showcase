@@ -19,7 +19,8 @@ ORM Framework:
 		WEB-INF/classes/mybatis/*.xml
 		
 	*NOSQL: Redis 演示：
-		1.利用Redis结合AOP建立log系统：
+		1.利用Redis结合AOP建立system log系统：
+			applicationContext-logger.xml
 			ActionLogInterceptor.java
 			ActionLog*Controller.java
 
@@ -37,6 +38,9 @@ Services:
 	*演示Qurtz实现的scheduler cronjob:
 		applicationContext-schedule.xml
 		
+	*演示集成Ehcache 本地Server Cache:
+		applicationContext-ehcache.xml
+		
 	*演示使用Spring @Async做异步线程方法
 		EmailServiceImpl.class
 	
@@ -45,7 +49,19 @@ Services:
 
 
 
-Spring Basic:
+Spring Functions:
 =======================================================================
 	*使用@Value 读取properties file : ImageUploadController
 	*使用System.getProperty("application.webapproot") 取得server绝对路径 : web.xml ImageUploadController
+	*使用@Synchronized 演示同步方法块 UserServiceImpl.generatePK()
+	*使用@Aspect 演示Aspect Style注解版的AOP : MethodStopWatchAspectJAspect
+
+Common Libraries:
+=======================================================================	
+	*演示Perf4j生产的log 和 report:  MethodStopWatchAspectJAspect:methodStopWatch
+	
+
+System Performance:
+=======================================================================	
+	*演示 使用Hystrix 做Service层级的 并发/超时/短路控制 : DemoSlowController
+		部署hystrix-dashboard-xxx.war 应用对Hystrix保护的function做访问监控

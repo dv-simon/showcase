@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- ====================== Load Cache Configuration File ====================================== -->
+	<bean id="cacheManagerBean" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:ehcache.xml" />
+
+	<bean id="cacheKeyGenerator" class="cft.commons.core.cache.SimpleCacheKeyGeneratorImpl" />
+
+
+	<!-- ============================= NewsList Cache Bean ====================================== -->
+	<bean id="30sCacheBean" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheManager-ref="cacheManagerBean"
+		p:cacheName="30sCacheName" />
+
+	<bean id="30sCacheInterceptor" class="cft.commons.core.cache.ehcache.EhcacheCacheInterceptor" p:cache-ref="30sCacheBean"
+		p:cacheKeyGenerator-ref="cacheKeyGenerator" />
+
+	<bean id="30sCachePointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="30sCacheInterceptor" />
+		<property name="patterns">
+			<list>
+				<value>.*DemoSlowServiceImpl.getUserByUserId.*</value>
+				<!-- add your others functions here -->
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- ========================= BeanNameAutoProxy ============================ -->
+	<bean id="cacheAutoproxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>demo*Service</value>
+
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>30sCachePointCut</value>
+				<!-- add your other pointcuts here -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ehcacheMonitoringManager" class="cft.commons.core.cache.ehcache.EhcacheMonitoringManager">
+		<property name="cacheManager" ref="cacheManagerBean" />
+	</bean>
+
+</beans>  

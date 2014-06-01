@@ -1,4 +1,4 @@
-package cft.commons.showcase.web;
+package cft.commons.showcase.web.system;
 
 import javax.servlet.http.HttpSession;
 

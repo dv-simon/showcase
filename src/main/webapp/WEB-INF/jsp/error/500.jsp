@@ -22,7 +22,7 @@
 <body>
 
 
-			<div class="alert alert-danger">
+			<div class="alert alert-danger gritter-center" style= "height: 200px">
 				<button type="button" class="close" data-dismiss="alert">
 					<i class="icon-remove"></i>
 				</button>

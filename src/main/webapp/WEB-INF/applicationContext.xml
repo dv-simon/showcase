@@ -21,6 +21,8 @@
 
 	<task:annotation-driven />
 
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
 	<!-- =========================== Auto IOC component scan =============================== -->
 	<context:component-scan base-package="cft.commons.showcase">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
@@ -53,13 +55,13 @@
 	<import resource="applicationContext-logger.xml" />
 	<import resource="applicationContext-email.xml" />
 	<import resource="applicationContext-schedule.xml" />
+	<import resource="applicationContext-ehcache.xml" />
 
 	<!--
 
 	<import resource="applicationContext-jpa.xml" />
 	<import resource="applicationContext-redisCache.xml" />
 	<import resource="applicationContext-redisLock.xml" />
-	<import resource="applicationContext-ehcache.xml" />
 	<import resource="applicationContext-memcached.xml" /> 
  	<import resource="applicationContext-jmx.xml" /> -->
 	

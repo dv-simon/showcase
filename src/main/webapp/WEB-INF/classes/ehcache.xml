@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache>
+
+	<!--============================== Cache Region Definitions ============================== -->
+	<cache name="30sCacheName" maxElementsInMemory="6000"
+		memoryStoreEvictionPolicy="LFU" eternal="false" timeToIdleSeconds="30"
+		timeToLiveSeconds="30" overflowToDisk="false" diskPersistent="false" />
+	
+	<cache name="10minsCacheName" maxElementsInMemory="6000"
+		memoryStoreEvictionPolicy="LFU" eternal="false" timeToIdleSeconds="600"
+		timeToLiveSeconds="600" overflowToDisk="false" diskPersistent="false" />
+
+	<!--============================== Default Cache 3 min =================================== -->
+	<defaultCache maxElementsInMemory="6000"
+		memoryStoreEvictionPolicy="LFU" eternal="false" timeToIdleSeconds="180"
+		timeToLiveSeconds="180" overflowToDisk="false" diskPersistent="false" />
+	
+
+</ehcache>    
