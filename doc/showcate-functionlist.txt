@@ -63,5 +63,5 @@ Common Libraries:
 
 System Performance:
 =======================================================================	
-	*演示 使用Hystrix 做Service层级的 并发/超时/短路控制 : DemoSlowController
+	*演示 使用Hystrix 做Service层级的 并发/超时/短路控制 : DemoHystrixController
 		部署hystrix-dashboard-xxx.war 应用对Hystrix保护的function做访问监控
