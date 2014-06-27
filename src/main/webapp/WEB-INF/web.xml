@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 
-	<display-name>cft-commos-showcase</display-name>
+	<display-name>cft-commons-showcase</display-name>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

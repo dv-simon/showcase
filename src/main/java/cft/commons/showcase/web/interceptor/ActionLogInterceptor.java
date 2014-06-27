@@ -13,7 +13,7 @@ import org.springframework.util.StopWatch;
 
 import cft.commons.core.constant.Constants;
 import cft.commons.core.helper.jackson.JsonMapper;
-import cft.commons.showcase.constant.ShowcaseConstants;
+import cft.commons.showcase.constant.CommonConstants;
 import cft.commons.showcase.dao.RedisDAO;
 import cft.commons.showcase.model.ActionLog;
 
@@ -62,7 +62,7 @@ public class ActionLogInterceptor implements MethodInterceptor {
 		String logString = jsonMapper.toJson(systemLog);
 
 		try {
-			redisDAO.leftPushQueue(ShowcaseConstants.KEY_SYSTEM_LOG_ACTION, logString, 1000);
+			redisDAO.leftPushQueue(CommonConstants.KEY_SYSTEM_LOG_ACTION, logString, 1000);
 		} catch (Exception ex) {
 			log.error("Exception during redisDAO.leftPushQueue.", ex);
 		}

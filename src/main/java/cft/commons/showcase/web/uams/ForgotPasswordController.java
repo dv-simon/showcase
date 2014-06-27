@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cft.commons.core.model.display.ResultJSON;
 import cft.commons.core.util.EncodeUtils;
 import cft.commons.core.util.IdentityUtils;
-import cft.commons.showcase.constant.ShowcaseConstants;
+import cft.commons.showcase.constant.CommonConstants;
 import cft.commons.showcase.model.User;
 import cft.commons.showcase.service.EmailService;
 import cft.commons.showcase.service.UserService;
@@ -64,7 +64,7 @@ public class ForgotPasswordController {
 			//生成随机token，并将加密的token限时持久化到Redis DB
 			String uuid = IdentityUtils.uuid2();
 			String encodeToken = EncodeUtils.encodeBase64String(uuid.getBytes());
-			final String key = ShowcaseConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
+			final String key = CommonConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
 			final String loginName = user.getLoginName();
 
 			redisTemplate.opsForValue().set(key, loginName, 600, TimeUnit.SECONDS);
@@ -90,7 +90,7 @@ public class ForgotPasswordController {
 
 		//首先检查此token是否存有效，并取出loginName
 		String encodeToken = EncodeUtils.encodeBase64String(token.getBytes());
-		String key = ShowcaseConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
+		String key = CommonConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
 		String loginName = redisTemplate.opsForValue().get(key);
 		//redisTemplate.opsForValue().getOperations().delete(key);
 
@@ -126,7 +126,7 @@ public class ForgotPasswordController {
 
 		//检测token是否有效，检测之后删除token
 		String encodeToken = EncodeUtils.encodeBase64String(token.getBytes());
-		String key = ShowcaseConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
+		String key = CommonConstants.KEY_TOKEN_FORGOTPASSWORD + encodeToken;
 		String loginName = redisTemplate.opsForValue().get(key);
 		if (StringUtils.isNotBlank(loginName)) {
 

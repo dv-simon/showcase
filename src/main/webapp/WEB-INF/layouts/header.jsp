@@ -1,6 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 		<div class="navbar navbar-default" id="navbar">
@@ -13,7 +12,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-home"></i>
-							cft-commons-showcase
+							cft-commons-showcase  (ver 0.9.0)
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -82,7 +81,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="/app/logout">
+									<a href="${ctx}/app/logout">
 										<i class="icon-off"></i>
 										Logout
 									</a>

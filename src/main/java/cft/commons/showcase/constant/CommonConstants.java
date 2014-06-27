@@ -4,7 +4,7 @@ package cft.commons.showcase.constant;
  * @author daniel
  *
  */
-public class ShowcaseConstants {
+public class CommonConstants {
 	
 	
 	//Redis Keys:

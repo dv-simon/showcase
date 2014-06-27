@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <link href="${ctx}/static/assets/css/bootstrap.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" href="${ctx}/static/assets/css/font-awesome.min.css" />
