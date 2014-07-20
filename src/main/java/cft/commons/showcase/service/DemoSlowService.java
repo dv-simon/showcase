@@ -8,5 +8,5 @@ import cft.commons.showcase.model.User;
  */
 public interface DemoSlowService {
 
-	User getUserByUserId(String userid);
+	User getUserByUserId(int userid);
 }

@@ -10,11 +10,11 @@ import cft.commons.showcase.model.User;
  */
 public interface UserService {
 
-	String generatePK();
+	//String generatePK();
 
 	void createUser(User user)throws Exception;
 
-	User getUserByUserId(String userId);
+	User getUserByUserId(int userId);
 	
 	User getUserByEmail(String email);
 
@@ -26,7 +26,7 @@ public interface UserService {
 	
 	Integer updateUser(User user);
 
-	Integer deleteUser(String userId);
+	Integer deleteUser(int userId);
 
 	Integer changeUserPassword(User user);
 

@@ -16,9 +16,9 @@ public class DemoSlowServiceHystrixCommand extends HystrixCommand<User> {
 
 	private DemoSlowService demoSlowService;
 
-	private String userId;
+	private Integer userId;
 
-	public DemoSlowServiceHystrixCommand(Setter commandConfig, DemoSlowService demoSlowService, String userId) {
+	public DemoSlowServiceHystrixCommand(Setter commandConfig, DemoSlowService demoSlowService, Integer userId) {
 		super(commandConfig);
 		this.demoSlowService = demoSlowService;
 		this.userId = userId;

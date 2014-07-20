@@ -60,11 +60,12 @@ public class UserViewController {
 	public String toUserEdit(String act,String userId, Model model) {	
 		
 		if(StringUtils.equals(act,"edit") && StringUtils.isNotBlank(userId)){
-			User user = userService.getUserByUserId(userId);
+			
+			User user = userService.getUserByUserId(Integer.parseInt(userId));
 			model.addAttribute("userForm",user);
 			
 			User userPasswordForm = new User();
-			userPasswordForm.setUserId(userId);
+			userPasswordForm.setUserId(Integer.parseInt(userId));
 			model.addAttribute("passwordForm", userPasswordForm);
 			
 		}else{

@@ -13,7 +13,7 @@ public class RolePropertyEditor extends PropertyEditorSupport {
 	@Override  
     public void setAsText(final String text) {  
 		Role role = new Role();
-		role.setRoleId(text);
+		role.setRoleId(Integer.parseInt(text));
 		
         setValue(role);  
     }  

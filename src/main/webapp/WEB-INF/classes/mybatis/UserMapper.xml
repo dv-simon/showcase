@@ -57,7 +57,7 @@
 	</select>
 
 
-	<select id="getUserByUserId" parameterType="String" resultMap="userResultMap">
+	<select id="getUserByUserId" parameterType="Integer" resultMap="userResultMap">
 		<include refid="getUser" />
 		WHERE t_user.USERID = #{userId}
 	</select>
@@ -148,11 +148,10 @@
 		
 	</select>
 
-	<insert id="insertUser">
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
  	<![CDATA[
  	INSERT INTO app_user
 		  (
-			userId,
 			loginName,
 			password,
 			salt,
@@ -167,7 +166,6 @@
 		  )
 		  VALUES
 		  (
-		   	#{userId},
 			#{loginName},
 			#{password},
 			#{salt},

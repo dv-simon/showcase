@@ -76,13 +76,13 @@ public class UserAPIController {
 		ResultJSON json = new ResultJSON();
 
 		//if userId is null, then create new record
-		if (StringUtils.isBlank(userForm.getUserId())) {
+		if (userForm.getUserId() == null) {
 
 			try {
 				userService.createUser(userForm);
 				User savedUser = userService.getUserByLoginName(userForm.getLoginName());
 
-				if (StringUtils.isNotBlank(savedUser.getUserId())) {
+				if (savedUser.getUserId() != null) {
 					log.info(Constants.SVC_LOG + "doCreateUser finished: savedUser userId: " + savedUser.getUserId());
 					json.setSuccess(true);
 					json.setDataObject(savedUser);
@@ -127,7 +127,7 @@ public class UserAPIController {
 
 		ResultJSON json = new ResultJSON();
 
-		Integer i = userService.deleteUser(userId);
+		Integer i = userService.deleteUser(Integer.parseInt(userId));
 		if (i == 1) {
 			json.setSuccess(true);
 			json.setDataObject(userId);

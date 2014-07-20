@@ -89,7 +89,7 @@ public class RoleAPIController {
 		}
 
 		*/
-		if (StringUtils.isBlank(roleForm.getRoleId())) {
+		if (roleForm.getRoleId() == null) {
 
 			try {
 				roleService.createRole(roleForm);
@@ -137,7 +137,7 @@ public class RoleAPIController {
 
 		ResultJSON json = new ResultJSON();
 
-		Integer i = roleService.disableRole(roleId);
+		Integer i = roleService.disableRole(Integer.parseInt(roleId));
 		if (i == 1) {
 			json.setSuccess(true);
 			json.setDataObject(roleId);

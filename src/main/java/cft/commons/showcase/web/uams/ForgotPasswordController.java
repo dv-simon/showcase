@@ -96,7 +96,7 @@ public class ForgotPasswordController {
 
 		User user = userService.getUserByLoginName(loginName);
 
-		if (StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(user.getUserId())) {
+		if (StringUtils.isNotBlank(loginName) && user != null) {
 			model.addAttribute("passwordForm", user);
 			model.addAttribute("token", token);
 		} else {

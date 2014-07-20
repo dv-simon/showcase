@@ -28,7 +28,7 @@ public class UserServiceTest {
 
 		userService.createUser(user);
 		
-		 user = userService.getUserByLoginName("88888");
+		user = userService.getUserByLoginName("88888");
 		System.out.println(user);
 		
 		
@@ -36,7 +36,7 @@ public class UserServiceTest {
 		user.setName("9999");
 		userService.updateUser(user);
 		
-		userService.deleteUser("U1005");
+		userService.deleteUser(user.getUserId());
 		
 	}
 

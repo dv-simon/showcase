@@ -45,7 +45,7 @@ public class RoleViewController {
 	public String toRoleEdit(String act,String roleId, Model model) {	
 		
 		if(StringUtils.equals(act,"edit") && StringUtils.isNotBlank(roleId)){
-			Role role = roleService.getRoleByRoleId(roleId);
+			Role role = roleService.getRoleByRoleId(Integer.parseInt(roleId));
 			role.setPermissionList(role.retrieveAllPermissions());
 			
 			model.addAttribute("roleForm", role);
@@ -75,7 +75,7 @@ public class RoleViewController {
 	@RequestMapping(value = "/view/toUpdateRole", method = RequestMethod.GET)
 	public String toUpdateRole(String roleId, Model model) {
 
-		Role role = roleService.getRoleByRoleId(roleId);
+		Role role = roleService.getRoleByRoleId(Integer.parseInt(roleId));
 		role.setPermissionList(role.retrieveAllPermissions());
 		
 		model.addAttribute("roleForm", role);

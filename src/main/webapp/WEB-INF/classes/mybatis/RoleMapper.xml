@@ -5,7 +5,7 @@
 
 <mapper namespace="cft.commons.showcase.dao.mybatis.RoleDAO">
 
-    <select id="getRoleByRoleId" parameterType="String" resultType="Role">
+    <select id="getRoleByRoleId" parameterType="Integer" resultType="Role">
    	    SELECT * FROM APP_ROLE WHERE ROLEID = #{roleId}
     </select>
 
@@ -48,11 +48,10 @@
 	</select>
 	
 
-	<insert id="insertRole">
+	<insert id="insertRole" useGeneratedKeys="true" keyProperty="roleId">
  	<![CDATA[
  	INSERT INTO APP_ROLE
 		  (
-			roleId,
 			name,
 			permissions,
 			status,
@@ -60,7 +59,6 @@
 		  )
 		  VALUES
 		  (
-		   	#{roleId},
 			#{name},
 			#{permissions},
 			#{status},

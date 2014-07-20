@@ -10,9 +10,9 @@ import cft.commons.showcase.model.Role;
  */
 public interface RoleService {
 	
-	String generatePK();
+	//String generatePK();
 
-	Role getRoleByRoleId(String roleId);
+	Role getRoleByRoleId(int roleId);
 
 	List<Role> getRoleList(Role role);
 
@@ -20,6 +20,6 @@ public interface RoleService {
 
 	Integer updateRole(Role role);
 
-	Integer disableRole(String roleId);
+	Integer disableRole(int roleId);
 
 }

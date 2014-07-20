@@ -22,19 +22,13 @@ public class DemoHystrixController {
 	@Resource(name = "demoSlowServiceHystrix")
 	private DemoSlowService demoSlowService2;
 
-	/*
-		@RequestMapping(value = "/demoSlow", method = RequestMethod.GET)
-		public @ResponseBody
-		User demoSlow() {
-			return demoSlowService.getUserByUserId("U1001");
-		}*/
-
+	
 	@RequestMapping(value = "/demoHystrix", method = RequestMethod.GET)
 	public @ResponseBody
 	User demoHystrix() {
 		User user = null;
 		try {
-			user = demoSlowService2.getUserByUserId("U1001");
+			user = demoSlowService2.getUserByUserId(1);
 		} catch (Exception ex) {
 			log.error("Exception during demoSlowService" , ex);
 		}

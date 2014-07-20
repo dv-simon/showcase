@@ -21,7 +21,7 @@ public class DemoSlowServiceImpl implements DemoSlowService {
 	private UserDAO userDAO;
 
 	@Override
-	public User getUserByUserId(String userId) {
+	public User getUserByUserId(int userId) {
 		Threads.sleep((int) (Math.random() * 2000) + 400); // just for demo slow
 		return userDAO.getUserByUserId(userId);
 	}

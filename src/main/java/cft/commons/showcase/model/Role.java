@@ -18,7 +18,7 @@ public class Role implements Serializable {
 
 	private static final long serialVersionUID = 5706504143044155364L;
 
-	private String roleId;
+	private Integer roleId;
 	private String name;
 	private String permissions;
 	private String status;

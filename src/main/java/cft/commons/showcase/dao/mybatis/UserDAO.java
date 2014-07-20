@@ -13,7 +13,7 @@ public interface UserDAO {
 
 	Integer isExistUser(String loginName) throws DataAccessException;
 
-	User getUserByUserId(String userId) throws DataAccessException;
+	User getUserByUserId(int userId) throws DataAccessException;
 
 	User getUserByLoginName(String loginName) throws DataAccessException;
 	
@@ -23,15 +23,15 @@ public interface UserDAO {
 	
 	Integer getUserListCount(User user) throws DataAccessException;
 
-	void insertUser(User user) throws DataAccessException;
+	Integer insertUser(User user) throws DataAccessException;
 
 	Integer updateUser(User user) throws DataAccessException;
 
 	Integer changeUserPassword(User user) throws DataAccessException;
 
-	Integer deleteUser(String userId) throws DataAccessException;
+	Integer deleteUser(int userId) throws DataAccessException;
 
-	void deleteUserRole(String userId) throws DataAccessException;
+	void deleteUserRole(int userId) throws DataAccessException;
 
 	void insertUserRole(Map<String, String> paramMap) throws DataAccessException;
 

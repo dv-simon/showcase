@@ -2,12 +2,12 @@ package cft.commons.showcase.service.impl;
 
 import java.util.List;
 
-import lombok.Synchronized;
+import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cft.commons.core.constant.Constants;
 import cft.commons.showcase.dao.mybatis.RoleDAO;
 import cft.commons.showcase.model.Role;
 import cft.commons.showcase.service.RoleService;
@@ -16,6 +16,7 @@ import cft.commons.showcase.service.RoleService;
  * @author daniel
  *
  */
+@Slf4j
 @Component("roleService")
 public class RoleServiceImpl implements RoleService {
 
@@ -23,7 +24,7 @@ public class RoleServiceImpl implements RoleService {
 	private RoleDAO roleDAO;
 
 	@Override
-	public Role getRoleByRoleId(String roleId) {
+	public Role getRoleByRoleId(int roleId) {
 		return roleDAO.getRoleByRoleId(roleId);
 	}
 
@@ -32,7 +33,8 @@ public class RoleServiceImpl implements RoleService {
 		return roleDAO.getRoleList(role);
 	}
 
-	@Synchronized
+	//for distribution PK Database
+	/*@Synchronized
 	@Override
 	public String generatePK() {
 
@@ -47,12 +49,15 @@ public class RoleServiceImpl implements RoleService {
 		}
 
 		return newPK;
-	}
+	}*/
 
 	@Override
 	public void createRole(Role role) {
-		role.setRoleId(generatePK());
+		//role.setRoleId(generatePK());
 		roleDAO.insertRole(role);
+		//演示插入数据后，object自动获取插入主键 id
+		log.info(Constants.SVC_LOG + "RoleServiceImpl:createRole:roleId = " + role.getRoleId());
+
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Integer disableRole(String roleId) {
+	public Integer disableRole(int roleId) {
 		return roleDAO.disableRole(roleId);
 	}
 

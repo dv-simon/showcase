@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 
-	@Override
+	//for distribution PK Database
+/*	@Override
 	@Synchronized
 	public String generatePK() {
 
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return newPK;
-	}
+	}*/
 
 	@Override
 	public List<User> getUserList(User user) {
@@ -71,16 +72,17 @@ public class UserServiceImpl implements UserService {
 
 		}
 
-		user.setUserId(generatePK());
+		//user.setUserId(generatePK());
 		userDAO.insertUser(user);
 
-		log.info(Constants.SVC_LOG + "UserServiceImpl:createUser:user = " + user);
+		//演示插入数据后，object自动获取插入主键 id
+		log.info(Constants.SVC_LOG + "UserServiceImpl:createUser:userId = " + user.getUserId());
 
 		if (CollectionUtils.isNotEmpty(user.getRoleList())) {
 			for (Role role : user.getRoleList()) {
 				Map<String, String> paramMap = new HashMap<String, String>();
-				paramMap.put("userId", user.getUserId());
-				paramMap.put("roleId", role.getRoleId());
+				paramMap.put("userId", user.getUserId().toString());
+				paramMap.put("roleId", role.getRoleId().toString());
 
 				userDAO.insertUserRole(paramMap);
 			}
@@ -94,7 +96,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByUserId(String userId) {
+	public User getUserByUserId(int userId) {
 		return userDAO.getUserByUserId(userId);
 	}
 
@@ -109,8 +111,8 @@ public class UserServiceImpl implements UserService {
 			for (Role role : user.getRoleList()) {
 
 				Map<String, String> paramMap = new HashMap<String, String>();
-				paramMap.put("userId", user.getUserId());
-				paramMap.put("roleId", role.getRoleId());
+				paramMap.put("userId", user.getUserId().toString());
+				paramMap.put("roleId", role.getRoleId().toString());
 
 				userDAO.insertUserRole(paramMap);
 			}
@@ -120,7 +122,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer deleteUser(String userId) {
+	public Integer deleteUser(int userId) {
 
 		log.info(Constants.SVC_LOG + "UserServiceImpl:deleteUser:userId = " + userId);
 

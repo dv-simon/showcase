@@ -23,7 +23,7 @@ public class DemoSlowServiceHystrixImpl implements DemoSlowService {
 	private DemoSlowService demoSlowService;
 
 	@Override
-	public User getUserByUserId(String userId) {
+	public User getUserByUserId(int userId) {
 		DemoSlowServiceHystrixCommand command = new DemoSlowServiceHystrixCommand(commandConfig, demoSlowService,
 				userId);
 		return command.execute();
