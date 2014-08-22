@@ -58,6 +58,7 @@ jQuery("#listDataGrid").jqGrid({
 	datatype: "json",
 	height: 330,
 	autowidth: true,
+	loadui: 'disable',
    	colNames:['Actions','UserId','LoginName', 'Name', 'Email','Phone','Office','Department','Language','Status','Remark'],
    	colModel:[
 		{name:'act',index:'act', width:40,sortable:false,search:false},

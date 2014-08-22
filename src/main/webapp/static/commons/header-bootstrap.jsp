@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="${ctx}/static/assets/css/ace.min.css" />
 <link rel="stylesheet" href="${ctx}/static/assets/css/ace-rtl.min.css" />
 <link rel="stylesheet" href="${ctx}/static/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="${ctx}/static/assets/css/loader.css" />
 		
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="${ctx}/static/assets/css/ace-ie.min.css" />
@@ -149,5 +150,15 @@ function alertRedirect(type,icon,title,detial,delay,url){
 }
 </script>
 <div class="alert-messages text-center"></div>
+
+<!--  Add loading progress bar for all ajax call  -->
+<script type="text/javascript">
+	//loading function for all ajax call
+	$(document).on({
+	    ajaxStart: function() { console.debug("ajaxStart");$("body").addClass("loadingMask");},
+	    ajaxStop: function() {console.debug("ajaxStop"); $("body").removeClass("loadingMask");}    
+	});
+</script>
+<div class="loadingModal"></div>
 
 <script src="${ctx}/static/js/cft-commons-custom-script-1.0.js"></script>
