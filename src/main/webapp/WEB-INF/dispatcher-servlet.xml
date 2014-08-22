@@ -67,10 +67,10 @@
 		<property name="order" value="3" />
 	</bean>
 	
-	<bean id="jasperViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+<!-- 	<bean id="jasperViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
         <property name="location" value="/WEB-INF/rptViews.xml"/>
     	<property name="order" value="0" />
-    </bean>
+    </bean> -->
 
 
 	<bean id="xmlCDATAMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
