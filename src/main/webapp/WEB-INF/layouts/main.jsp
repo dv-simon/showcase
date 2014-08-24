@@ -10,7 +10,7 @@
 <%@ include file="/static/commons/jstl-taglibs.jsp"%>
 <%@ include file="/static/commons/header-bootstrap.jsp"%>	
 
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="shiro" uri="http://extends.shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%@page import="java.util.Date"%>
 </head>

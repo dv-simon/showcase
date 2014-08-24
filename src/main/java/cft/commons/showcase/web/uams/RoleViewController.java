@@ -46,19 +46,12 @@ public class RoleViewController {
 		
 		if(StringUtils.equals(act,"edit") && StringUtils.isNotBlank(roleId)){
 			Role role = roleService.getRoleByRoleId(Integer.parseInt(roleId));
-			role.setPermissionList(role.retrieveAllPermissions());
-			
 			model.addAttribute("roleForm", role);
 			
 		}else{
 			Role role = new Role();
 			model.addAttribute("roleForm", role);
 		}
-		
-		Role role = new Role();
-		role.setStatus("active");
-		List<Role> roleList = roleService.getRoleList(role);
-		model.addAttribute("roleList", roleList);
 		
 		return "/uams/roleEdit";
 	}

@@ -61,6 +61,7 @@
 						
 						
 						<!-- ================= Level-1 item ================= -->
+						<shiro:hasAnyPermissions name="User:Read,Role:Read">
 						<li id="account">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-group"></i>
@@ -70,21 +71,26 @@
 							</a>
 
 							<ul class="submenu">
+							<shiro:hasPermission name="User:Read">
 								<li id="userAccount">
 									<a href="${ctx}/app/view/user?item=account&subItem=userAccount">
 										<i class="icon-double-angle-right"></i>
 										User Account
 									</a>
 								</li>
-
+							</shiro:hasPermission>
+							
+							<shiro:hasPermission name="Role:Read">
 								<li id="userRole">
 									<a href="${ctx}/app/view/role?item=account&subItem=userRole">
 										<i class="icon-double-angle-right"></i>
 										User Role
 									</a>
 								</li>
+							</shiro:hasPermission>
 							</ul>
 						</li>
+						</shiro:hasAnyPermissions>
 						<!-- ================= Level-1 item ================= -->
 						
 						

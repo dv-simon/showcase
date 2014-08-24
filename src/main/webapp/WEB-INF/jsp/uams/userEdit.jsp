@@ -6,6 +6,7 @@
 <%@page import="java.util.Date"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
+<%@ taglib prefix="shiro" uri="http://extends.shiro.apache.org/tags"%>
 
 <div class="modal-dialog">
 		<div class="modal-content">
@@ -176,9 +177,12 @@
 							<button class="btn btn-sm pull-left" data-dismiss="modal">
 								<i class="icon-remove"></i>Close&nbsp;
 							</button>
+							
+							<shiro:hasPermission name="User:Edit">
 							<button class="btn btn-sm btn-info pull-right" onclick="saveRecord()" type="submit">
 							<i class="icon-ok"></i>Submit
 							</button>
+							</shiro:hasPermission>
 							</div>
 						</div>
 
@@ -214,10 +218,14 @@
 							<button class="btn btn-sm pull-left" data-dismiss="modal">
 								<i class="icon-remove"></i>Close&nbsp;
 							</button>
+							
+							<shiro:hasPermission name="User:Edit">
 							<button class="btn btn-sm btn-info pull-right" onclick="changeUserPassword()" type="submit">
 							<i class="icon-ok"></i>Submit
 							</button>
+							</shiro:hasPermission>
 							</div>
+							
 						</div>
 						</c:if>
 						

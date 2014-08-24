@@ -30,7 +30,7 @@
 						<label class="col-sm-3 control-label no-padding-right">RoleId</label>
 
 						<div class="col-sm-9">
-							<form:input path="roleId" class="col-xs-10 col-sm-6 limited" maxlength="20" readonly="true"/>
+							<form:input path="roleId" class="col-xs-10 col-sm-8 limited" maxlength="20" readonly="true"/>
 						</div>
 					</div>
 					</c:if>
@@ -40,20 +40,101 @@
 						<label class="col-sm-3 control-label no-padding-right">Role Name:</label>
 
 						<div class="col-sm-9">
-  						 		<form:input path="name" placeholder="name" class="col-xs-10 col-sm-6 limited" maxlength="20" />
+  						 		<form:input path="name" placeholder="name" class="col-xs-10 col-sm-8 limited" maxlength="20"/>
 						</div>
 					</div>
 
-					
-					
-
-					<div class="space-4"></div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right">Permissions:</label>
-						<div class="col-sm-9">
-						<form:input path="permissions" id="form-field-role-tags" class="col-xs-10 col-sm-6" placeholder="Enter permission tags ..." />
-						</div>
-					</div>
+				<div class="space-4"></div>
+			    <div class="form-group">
+				    
+				    <form:input path="permissions" type="hidden" id="form-field-role-tags"/>
+				    
+				    	<label class="col-sm-3 control-label no-padding-right">Permissions:</label>
+				    	<div class="col-sm-9" style="width:52%">
+							<div class="widget-box">
+							    <div class="widget-header header-color-blue2">
+							        <h5 class="lighter smaller">
+							            Choose Permissions
+							        </h5>
+							    </div>
+							    <div class="widget-body">
+							        <div class="widget-main padding-8">
+							            <div id="treePermissions" class="tree tree-selectable">
+							               
+							                <!-- =========Account========= -->	
+							                <div class="tree-folder" style="display: block;">
+							                    <div class="tree-folder-header">
+							                        <i class="icon-plus">
+							                        </i>
+							                        <div class="tree-folder-name">
+							                            Account
+							                        </div>
+							                    </div>
+							                    <div class="tree-folder-content" style="display: none;">
+							                      <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                User:Read
+							                            </div>
+							                        </div>
+							                      <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                User:Edit
+							                            </div>
+							                        </div>		
+							                        <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                Role:Read
+							                            </div>
+							                        </div>
+							                      <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                Role:Edit
+							                            </div>
+							                        </div>								                        							                        							                        
+							                    </div>
+							                </div>
+							                
+							                 <!-- =========System========= -->	
+							                <div class="tree-folder" style="display: block;">
+							                    <div class="tree-folder-header">
+							                        <i class="icon-plus">
+							                        </i>
+							                        <div class="tree-folder-name">
+							                            System
+							                        </div>
+							                    </div>
+							                    <div class="tree-folder-content" style="display: none;">
+							                        <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                SystemConfig:Read
+							                            </div>
+							                        </div>
+							                        <div class="tree-item" style="display: block;">
+							                            <i class="icon-remove">
+							                            </i>
+							                            <div class="tree-item-name">
+							                                SystemConfig:Edit
+							                            </div>
+							                        </div>							                        							                        							                        
+							                    </div>
+							                </div>
+							               					                						               							                
+							            </div>							            
+							        </div>
+							    </div>
+							</div>
+						</div>						    	
+				    </div>	
 					
 					
 					<div class="space-4"></div>
@@ -61,7 +142,7 @@
 
 						<label class="col-sm-3 control-label no-padding-right">Status:</label>
 						<div class="col-sm-9">
-							<form:select path="status" items="${statusMap}" class="col-xs-10 col-sm-6" />
+							<form:select path="status" items="${statusMap}" class="col-xs-10 col-sm-8" />
 						</div>
 					</div>
 
@@ -69,7 +150,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right">Remark:</label>
 						<div class="col-sm-9">
-							<form:textarea path="remark" class="col-xs-10 col-sm-6 limited" maxlength="50"/>
+							<form:textarea path="remark" class="col-xs-10 col-sm-8 limited" maxlength="50"/>
 						</div>
 					</div>
 				</form:form>
@@ -128,40 +209,59 @@
 	}
 
 	function saveRecord() {
+		
+		//保存treePermissions已选的值
+		var treePer = $("#treePermissions").find(".tree-item-name");
+		var treePerVal = "";
+		$.each(treePer,function(i){
+			if ($(treePer[i]).prev().attr("class") == "icon-ok"){
+				treePerVal = treePerVal + $(treePer[i]).text().trim() + ",";	
+			}				
+		});
+		treePerVal = treePerVal.substring(0,treePerVal.length-1);
+		$("#form-field-role-tags").val(treePerVal);
+		
 		$("#roleForm").ajaxSubmit(options);
 	} 
 
-	//Role Permission Tags
-	$(function($) {
-		var role_tag_input = $('#form-field-role-tags');
-		if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) ) 
-		{
-			role_tag_input.tag(
-			  {
-				placeholder:role_tag_input.attr('placeholder'),
-				source: ace.variable_ROLE_TAGS,//defined in ace.js >> ace.enable_search_ahead
-			  }
-			);
-		}
-		else {
-			role_tag_input.after('<textarea id="'+role_tag_input.attr('id')+'" name="'+role_tag_input.attr('name')+'" rows="3">'+role_tag_input.val()+'</textarea>').remove();
-		}
-	});
 
-	$(function($) {
-		ace.variable_ROLE_TAGS = [ "sc:user:read","sc:user:create", "sc:user:update", "sc:user:delete", 
-		                           "sc:role:read","sc:role:create", "sc:role:update", "sc:role:delete"];
-		try {
-			a("#nav-search-input").typeahead({
-				source : ace.variable_ROLE_TAGS,
-				updater : function(c) {
-					a("#nav-search-input").focus();
-					return c;
+	//初始化显示页面role select的值
+	$(function($) {		
+
+		//已选的permissions的值
+		var selVal = '${roleForm.permissions}';
+		var nameSels = selVal.split(",");
+		
+		//显示已选的permissions
+		var treePer = $("#treePermissions").find(".tree-item-name");
+		$.each(treePer,function(i){
+			var treePerVal = $(treePer[i]).text().trim();
+			$.each(nameSels,function(j){
+				if(treePerVal == nameSels[j]){					
+					$(treePer[i]).parent().addClass("tree-selected");
+					$(treePer[i]).prev().removeClass("icon-remove").addClass("icon-ok");
+					$(treePer[i]).parent().parent().css("display","block");
+					$(treePer[i]).parent().parent().prev().find("i").removeClass("icon-plus").addClass("icon-minus");
 				}
 			});
-		} catch (b) {
-		}
+		});
+		
+		//绑定树第一标题点击事件
+		$("#treePermissions").find(".tree-folder-header").each(function(){
+			$(this).click(function(){
+				$(this).find("i").toggleClass("icon-plus").toggleClass("icon-minus");
+				$(this).next().toggle();
+			});
+		});
+		
+		//绑定树第二标题点击事件
+		$("#treePermissions").find(".tree-folder-content").children().each(function(){
+			$(this).click(function(){
+				$(this).find("i").toggleClass("icon-ok").toggleClass("icon-remove");
+				$(this).find("i").parent().toggleClass("tree-selected");
+			});
+		});
+		
 	});
-	
 </script>
 <script src="${ctx}/static/js/cft-commons-custom-form-1.0.js"></script>
