@@ -162,3 +162,5 @@ function alertRedirect(type,icon,title,detial,delay,url){
 <div class="loadingModal"></div>
 
 <script src="${ctx}/static/js/cft-commons-custom-script-1.0.js"></script>
+
+<script type="text/javascript">$.ajaxSetup({ cache: false });</script>
