@@ -18,6 +18,7 @@
 	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="/cft-commons-showcase-event.log" />
 		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8"/>
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{HH:mm:ss SSS} %-5p %t - %m%n" />
@@ -33,6 +34,7 @@
 	<appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="/cft-commons-showcase-error.log" />
 		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8"/>
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{HH:mm:ss SSS} %-5p %t - %m%n" />
