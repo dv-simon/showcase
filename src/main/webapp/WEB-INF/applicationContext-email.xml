@@ -9,7 +9,7 @@
 		<property name="contentTemplate">
 			<value><![CDATA[
 			<html>
-			</head><body>
+			<head></head><body>
 			<pre>
 			%s 您好:
 
